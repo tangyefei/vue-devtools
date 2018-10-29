@@ -39,8 +39,7 @@
       </span>
       <span
         v-else
-        :class="{ abstract: fieldOptions.abstract }"
-        class="key"
+        :class="{ abstract: fieldOptions.abstract, key: filter!==field.key, green: filter===field.key}"
       >{{ field.key }}</span><span
         v-if="!fieldOptions.abstract"
         class="colon"
@@ -173,6 +172,7 @@
     >
       <data-field
         v-for="subField in limitedSubFields"
+        :filter="filter"
         :key="subField.key"
         :field="subField"
         :parent-field="field"
@@ -242,7 +242,6 @@ export default {
   mixins: [
     DataFieldEdit
   ],
-
   props: {
     field: {
       type: Object,
@@ -255,6 +254,10 @@ export default {
     path: {
       type: String,
       required: true
+    },
+    filter: {
+      type: String,
+      required: false
     }
   },
 

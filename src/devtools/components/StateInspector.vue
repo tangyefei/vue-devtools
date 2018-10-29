@@ -24,6 +24,7 @@
           <data-field
             v-for="field in state[dataType]"
             :key="field.key"
+            :filter="filter"
             :field="field"
             :depth="0"
             :path="field.key"
@@ -66,6 +67,10 @@ export default {
     state: {
       type: Object,
       required: true
+    },
+    filter: {
+      type: String,
+      required: false
     }
   },
 

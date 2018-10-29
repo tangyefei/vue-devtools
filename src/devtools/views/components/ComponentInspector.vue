@@ -52,7 +52,7 @@
         v-else
         class="data"
       >
-        <state-inspector :state="filteredState" />
+        <state-inspector :state="filteredState" :filter="filter" />
       </section>
     </template>
   </scroll-pane>
@@ -95,11 +95,16 @@ export default {
     },
 
     filteredState () {
-      return groupBy(sortByKey(this.target.state.filter(el => {
-        return searchDeepInObject({
-          [el.key]: el.value
-        }, this.filter)
-      })), 'type')
+      console.log('this.target.state')
+      return groupBy(sortByKey(
+        this.target.state.filter(el => {
+          console.log('key = ' + el.key)
+          return searchDeepInObject({
+            [el.key]: el.value
+          }, this.filter)
+        })
+
+      ), 'type')
     }
   },
 
